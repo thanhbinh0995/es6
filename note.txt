@@ -1,0 +1,7 @@
+Cac ham dung ES6:
+- filter
+- reduce
+- arrow function (=>)
+- hien thi string voi dau backticks
+- require
+
