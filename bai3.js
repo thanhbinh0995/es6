@@ -16,7 +16,7 @@ console.log("-------------- Het Cau 3a ------------------\n");
 
 console.log("-------------- Cau 3b ------------------");
 const daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-var res = str.replace(/thu/gi, "on");
+let res = str.replace(/thu/gi, "on");
 res = res.replace(/\d+/gi, (x) => daysInWeek[x-2]);
 console.log(res);
 console.log("-------------- Het Cau 3b ------------------\n");

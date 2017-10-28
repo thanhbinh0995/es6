@@ -16030,7 +16030,7 @@ function calculateAge(birthday) {
 // var date = prompt("Enter your birthday: ");
 
 console.log("--------------Cau 1------------------");
-var date = '22/12/2012';
+var date = '26/10/2012';
 var birthday = (0, _moment2.default)(date, "DD/MM/YYYY");
 console.log(calculateAge(birthday));
 console.log("----------------- Het cau 1 ---------------\n\n");
