@@ -4,4 +4,5 @@ Cac ham dung ES6:
 - arrow function (=>)
 - hien thi string voi dau backticks
 - require
-
+- import, export module, function 
+- repeat trong string 
