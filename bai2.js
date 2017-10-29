@@ -1,62 +1,38 @@
 /*
-2.
-Cho Countries: https://github.com/samayo/country-json/blob/master/src/country-by-avg-male-height.json;
-a. Sort: Theo tên(tăng dần)
-b. Sort: Theo height(giảm dần)
-c. Tìm các quốc gia có height [160;170] và tên quốc gia bắt đầu bằng ký tự B hoặc C
-d. Tính tổng height của câu c
-*/
+ 2.
+ Cho Countries: https://github.com/samayo/country-json/blob/master/src/country-by-avg-male-height.json;
+ a. Sort: Theo tên(tăng dần)
+ b. Sort: Theo height(giảm dần)
+ c. Tìm các quốc gia có height [160;170] và tên quốc gia bắt đầu bằng ký tự B hoặc C
+ d. Tính tổng height của câu c
+ */
 import cities from './cities.json'
+import {sortByHeight, sortByName, filterCities, totalHeight, log} from './actions';
 
-function sortByHeight(cities) {
-  return cities.sort((a, b) => b.height - a.height);
-}
-
-function sortByName(cities) {
-  return cities.sort((a, b) => {
-    let countryA = a.country.toUpperCase();
-    let countryB = b.country.toUpperCase();
-    return countryA < countryB ? -1
-      : countryA > countryB ? 1 : 0;
-  })
-}
-
-function filterCities(cities) {
-  return cities.filter((city) => {
-    return (city.height >= 160 && city.height <= 170) && (city.country[0] === 'B' || city.country[0] === 'C');
-  })
-}
-
-function totalHeight(cities) {
-  return cities.reduce((height, city, index, cities_custom) => {
-    return height += city.height
-  }, 0)
-}
-
-console.log("-------------- Cau 2 ------------------");
-console.log("-------------- Cau 2a ------------------");
-console.log("sort cities by height");
+log(" Cau 2 ", true);
+log(" Cau 2a ", true);
+log(" sap xep cac quoc gia theo chieu cao ");
 let cityByHeight = sortByHeight(cities.slice());
-console.log(cityByHeight);
-console.log("-------------- Het Cau 2a ------------------\n");
+log(cityByHeight);
+log(" Het Cau 2a ", true);
 
 
-console.log("-------------- Cau 2b ------------------");
-console.log("sort cities by name");
+log(" Cau 2b ", true);
+log(" sap xep cac quoc gia theo ten ");
 let citiesByName = sortByName(cities.slice());
-console.log(citiesByName);
-console.log("-------------- Het Cau 2b ------------------\n");
+log(citiesByName);
+log(" Het Cau 2b ", true);
 
 
-console.log("-------------- Cau 2c ------------------");
-console.log("cities have height between 160 and 170 and first country name begin B or C");
+log(" Cau 2c ", true);
+log("loc cac quoc gia co chieu cao tu [160, 170] va ten quoc gia bat dau B hoac C");
 let citiesCustom = filterCities(cities);
-console.log(citiesCustom);
-console.log("----------------- Het cau 2c ---------------\n")
+log(citiesCustom);
+log(" Het cau 2c ", true);
 
 
-console.log("-------------- Cau 2d ------------------");
+log(" Cau 2d ", true);
 let total = totalHeight(citiesCustom);
-console.log(`total height is ${total}`);
-console.log("----------------- Het cau 2d ---------------\n")
-console.log("----------------- Het cau 2 ---------------\n\n")
+log(`tong chieu cao cua cac quoc gia o trong cau c la ${total}`);
+log(" Het cau 2d ", true);
+log(" Het cau 2 ", true);

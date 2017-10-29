@@ -4,19 +4,21 @@ a. Tách lấy tất cả các số có trong chuỗi.
 b. Chuyển chuỗi ở trên thành ngày tiếng anh dạng "on Monday, ...., on Saturday".
 Note: Giả thiết một tuần có 6 ngày. Không có ngày chủ nhật.
 */
-console.log("-------------- Cau 3 ------------------");
+import {log} from './actions';
+
+log(" Cau 3 ", true);
 let str = "thu 2, thu 5, thu 4, thu 3, thu 6, thu 7";
+log(`str = ${str}`);
 
-
-console.log("-------------- Cau 3a ------------------");
+log(" Cau 3a ", true);
 let allNumber = str.match(/\d+/g).join("");
-console.log(allNumber);
-console.log("-------------- Het Cau 3a ------------------\n");
+log(`tat ca cac so co trong chuoi str la : ${allNumber}`);
+log(" Het Cau 3a ", true);
 
 
-console.log("-------------- Cau 3b ------------------");
+log(" Cau 3b ", true);
 const daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 let res = str.replace(/thu/gi, "on");
 res = res.replace(/\d+/gi, (x) => daysInWeek[x-2]);
-console.log(res);
-console.log("-------------- Het Cau 3b ------------------\n");
+log(res);
+log(" Het Cau 3b ", true);

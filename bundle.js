@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 119);
+/******/ 	return __webpack_require__(__webpack_require__.s = 120);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(122)("./" + name);
+            __webpack_require__(123)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4582,7 +4582,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(121)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(122)(module)))
 
 /***/ }),
 /* 1 */
@@ -15996,23 +15996,26 @@ return zhTw;
 
 
 /***/ }),
-/* 119 */
+/* 119 */,
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 document.write('welcome');
-__webpack_require__(120);
-__webpack_require__(123);
-__webpack_require__(125);
+__webpack_require__(121);
+__webpack_require__(124);
+__webpack_require__(126);
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var _actions = __webpack_require__(127);
 
 var _moment = __webpack_require__(0);
 
@@ -16020,23 +16023,17 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function calculateAge(birthday) {
-    var today = (0, _moment2.default)();
-    var res = today.year() - birthday.year();
-    var checkMonth = today.month() - birthday.month();
-    var checkDate = today.date() - birthday.date();
-    if (checkMonth < 0 || checkMonth === 0 && checkDate < 0) return res - 1;else if (checkMonth > 0 || checkMonth === 0 && checkDate > 0) return res + 1;else return res;
-} //Nhập vào ngày sinh(22/12/2012) cho biết đó sinh nhật lần thứ mấy.
+//Nhập vào ngày sinh(22/12/2012) cho biết đó sinh nhật lần thứ mấy.
 // var date = prompt("Enter your birthday: ");
 
-console.log("--------------Cau 1------------------");
-var date = '26/10/2012';
+(0, _actions.log)("Cau 1", true);
+var date = '22/12/2012';
 var birthday = (0, _moment2.default)(date, "DD/MM/YYYY");
-console.log(calculateAge(birthday));
-console.log("----------------- Het cau 1 ---------------\n\n");
+(0, _actions.log)('so tuoi hien tai: ' + (0, _actions.calculateAge)(birthday));
+(0, _actions.log)("Het cau 1", true);
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -16064,7 +16061,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -16319,34 +16316,137 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 122;
+webpackContext.id = 123;
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _cities = __webpack_require__(124);
+var _cities = __webpack_require__(125);
 
 var _cities2 = _interopRequireDefault(_cities);
 
+var _actions = __webpack_require__(127);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/*
+ 2.
+ Cho Countries: https://github.com/samayo/country-json/blob/master/src/country-by-avg-male-height.json;
+ a. Sort: Theo tên(tăng dần)
+ b. Sort: Theo height(giảm dần)
+ c. Tìm các quốc gia có height [160;170] và tên quốc gia bắt đầu bằng ký tự B hoặc C
+ d. Tính tổng height của câu c
+ */
+(0, _actions.log)(" Cau 2 ", true);
+(0, _actions.log)(" Cau 2a ", true);
+(0, _actions.log)(" sap xep cac quoc gia theo chieu cao ");
+var cityByHeight = (0, _actions.sortByHeight)(_cities2.default.slice());
+(0, _actions.log)(cityByHeight);
+(0, _actions.log)(" Het Cau 2a ", true);
+
+(0, _actions.log)(" Cau 2b ", true);
+(0, _actions.log)(" sap xep cac quoc gia theo ten ");
+var citiesByName = (0, _actions.sortByName)(_cities2.default.slice());
+(0, _actions.log)(citiesByName);
+(0, _actions.log)(" Het Cau 2b ", true);
+
+(0, _actions.log)(" Cau 2c ", true);
+(0, _actions.log)("loc cac quoc gia co chieu cao tu [160, 170] va ten quoc gia bat dau B hoac C");
+var citiesCustom = (0, _actions.filterCities)(_cities2.default);
+(0, _actions.log)(citiesCustom);
+(0, _actions.log)(" Het cau 2c ", true);
+
+(0, _actions.log)(" Cau 2d ", true);
+var total = (0, _actions.totalHeight)(citiesCustom);
+(0, _actions.log)('tong chieu cao cua cac quoc gia o trong cau c la ' + total);
+(0, _actions.log)(" Het cau 2d ", true);
+(0, _actions.log)(" Het cau 2 ", true);
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports) {
+
+module.exports = [{"country":"Netherlands","height":181},{"country":"Iceland","height":179.8},{"country":"Norway","height":179.7},{"country":"Sweden","height":179.3},{"country":"Denmark","height":178.8},{"country":"Finland","height":178.4},{"country":"Eritrea","height":175.8},{"country":"Czech Republic","height":178.3},{"country":"Slovenia","height":178.1},{"country":"Luxembourg","height":178},{"country":"Croatia","height":177.6},{"country":"Germany","height":177.4},{"country":"Estonia","height":177.1},{"country":"Austria","height":177},{"country":"Belgium","height":176.6},{"country":"Serbia","height":176.5},{"country":"Switzerland","height":176.5},{"country":"United States","height":176.4},{"country":"Australia","height":176.3},{"country":"Poland","height":176},{"country":"Greece","height":175.7},{"country":"New Zealand","height":175.5},{"country":"United Kingdom","height":175.4},{"country":"Hungary","height":175.3},{"country":"Ukraine","height":175},{"country":"Ireland","height":175},{"country":"Russia","height":175},{"country":"Israel","height":175},{"country":"Lithuania","height":175},{"country":"Canada","height":174.3},{"country":"Lebanon","height":174.2},{"country":"Turkey","height":174.1},{"country":"France","height":174.1},{"country":"Uzbekistan","height":173.4},{"country":"Italy","height":173.2},{"country":"Senegal","height":173},{"country":"Jamaica","height":172.8},{"country":"Mali","height":172.5},{"country":"Spain","height":172},{"country":"Romania","height":172},{"country":"Azerbaijan","height":172},{"country":"Uruguay","height":171.8},{"country":"Argentina","height":171.3},{"country":"SouthKorea","height":171},{"country":"Syria","height":171},{"country":"Morocco","height":170.7},{"country":"Iran","height":170.6},{"country":"Portugal","height":170.5},{"country":"Ivory Coast","height":170.4},{"country":"Egypt","height":170.3},{"country":"Tunisia","height":170.3},{"country":"Algeria","height":170.2},{"country":"South Africa","height":170},{"country":"Cameroon","height":170},{"country":"Gambia","height":170},{"country":"Ghana","height":169.8},{"country":"Brazil","height":169.5},{"country":"Colombia","height":169.5},{"country":"Taiwan","height":169.3},{"country":"Chile","height":169.2},{"country":"Venezuela","height":169},{"country":"Paraguay","height":169},{"country":"Japan","height":168.6},{"country":"Hong Kong","height":168.5},{"country":"China","height":168.3},{"country":"Mexico","height":167.5},{"country":"Pakistan","height":167},{"country":"Singapore","height":166.6},{"country":"Thailand","height":166.4},{"country":"Mongolia","height":166.4},{"country":"Malaysia","height":166},{"country":"Sri Lanka","height":166},{"country":"Malawi","height":166},{"country":"Bahrain","height":165.6},{"country":"Iraq","height":165.4},{"country":"Nigeria","height":165},{"country":"Peru","height":164.3},{"country":"NorthKorea","height":163.8},{"country":"India","height":162.3},{"country":"Vietnam","height":162.1},{"country":"Philippines","height":162},{"country":"Indonesia","height":161.5},{"country":"Cambodia","height":160.3}]
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _actions = __webpack_require__(127);
+
+(0, _actions.log)(" Cau 3 ", true); /*
+                                    3. Cho chuỗi: "thu 2, thu 5, thu 4, thu 3, thu 6, thu 7";
+                                    a. Tách lấy tất cả các số có trong chuỗi.
+                                    b. Chuyển chuỗi ở trên thành ngày tiếng anh dạng "on Monday, ...., on Saturday".
+                                    Note: Giả thiết một tuần có 6 ngày. Không có ngày chủ nhật.
+                                    */
+
+var str = "thu 2, thu 5, thu 4, thu 3, thu 6, thu 7";
+(0, _actions.log)("str = " + str);
+
+(0, _actions.log)(" Cau 3a ", true);
+var allNumber = str.match(/\d+/g).join("");
+(0, _actions.log)("tat ca cac so co trong chuoi str la : " + allNumber);
+(0, _actions.log)(" Het Cau 3a ", true);
+
+(0, _actions.log)(" Cau 3b ", true);
+var daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var res = str.replace(/thu/gi, "on");
+res = res.replace(/\d+/gi, function (x) {
+  return daysInWeek[x - 2];
+});
+(0, _actions.log)(res);
+(0, _actions.log)(" Het Cau 3b ", true);
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.log = log;
+exports.calculateAge = calculateAge;
+exports.sortByHeight = sortByHeight;
+exports.sortByName = sortByName;
+exports.filterCities = filterCities;
+exports.totalHeight = totalHeight;
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function log(message) {
+  var dash = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  return dash ? console.log("-".repeat(20) + message + "-".repeat(20)) : console.log(message);
+}
+
+function calculateAge(birthday) {
+  var today = (0, _moment2.default)();
+  var res = today.year() - birthday.year();
+  var checkMonth = today.month() - birthday.month();
+  var checkDate = today.date() - birthday.date();
+  if (checkMonth < 0 || checkMonth === 0 && checkDate < 0) return res - 1;else if (checkMonth > 0 || checkMonth === 0 && checkDate > 0) return res + 1;else return res;
+}
 
 function sortByHeight(cities) {
   return cities.sort(function (a, b) {
     return b.height - a.height;
   });
-} /*
-  2.
-  Cho Countries: https://github.com/samayo/country-json/blob/master/src/country-by-avg-male-height.json;
-  a. Sort: Theo tên(tăng dần)
-  b. Sort: Theo height(giảm dần)
-  c. Tìm các quốc gia có height [160;170] và tên quốc gia bắt đầu bằng ký tự B hoặc C
-  d. Tính tổng height của câu c
-  */
-
+}
 
 function sortByName(cities) {
   return cities.sort(function (a, b) {
@@ -16363,71 +16463,10 @@ function filterCities(cities) {
 }
 
 function totalHeight(cities) {
-  return cities.reduce(function (height, city, index, cities_custom) {
+  return cities.reduce(function (height, city) {
     return height += city.height;
   }, 0);
 }
-
-console.log("-------------- Cau 2 ------------------");
-console.log("-------------- Cau 2a ------------------");
-console.log("sort cities by height");
-var cityByHeight = sortByHeight(_cities2.default.slice());
-console.log(cityByHeight);
-console.log("-------------- Het Cau 2a ------------------\n");
-
-console.log("-------------- Cau 2b ------------------");
-console.log("sort cities by name");
-var citiesByName = sortByName(_cities2.default.slice());
-console.log(citiesByName);
-console.log("-------------- Het Cau 2b ------------------\n");
-
-console.log("-------------- Cau 2c ------------------");
-console.log("cities have height between 160 and 170 and first country name begin B or C");
-var citiesCustom = filterCities(_cities2.default);
-console.log(citiesCustom);
-console.log("----------------- Het cau 2c ---------------\n");
-
-console.log("-------------- Cau 2d ------------------");
-var total = totalHeight(citiesCustom);
-console.log('total height is ' + total);
-console.log("----------------- Het cau 2d ---------------\n");
-console.log("----------------- Het cau 2 ---------------\n\n");
-
-/***/ }),
-/* 124 */
-/***/ (function(module, exports) {
-
-module.exports = [{"country":"Netherlands","height":181},{"country":"Iceland","height":179.8},{"country":"Norway","height":179.7},{"country":"Sweden","height":179.3},{"country":"Denmark","height":178.8},{"country":"Finland","height":178.4},{"country":"Eritrea","height":175.8},{"country":"Czech Republic","height":178.3},{"country":"Slovenia","height":178.1},{"country":"Luxembourg","height":178},{"country":"Croatia","height":177.6},{"country":"Germany","height":177.4},{"country":"Estonia","height":177.1},{"country":"Austria","height":177},{"country":"Belgium","height":176.6},{"country":"Serbia","height":176.5},{"country":"Switzerland","height":176.5},{"country":"United States","height":176.4},{"country":"Australia","height":176.3},{"country":"Poland","height":176},{"country":"Greece","height":175.7},{"country":"New Zealand","height":175.5},{"country":"United Kingdom","height":175.4},{"country":"Hungary","height":175.3},{"country":"Ukraine","height":175},{"country":"Ireland","height":175},{"country":"Russia","height":175},{"country":"Israel","height":175},{"country":"Lithuania","height":175},{"country":"Canada","height":174.3},{"country":"Lebanon","height":174.2},{"country":"Turkey","height":174.1},{"country":"France","height":174.1},{"country":"Uzbekistan","height":173.4},{"country":"Italy","height":173.2},{"country":"Senegal","height":173},{"country":"Jamaica","height":172.8},{"country":"Mali","height":172.5},{"country":"Spain","height":172},{"country":"Romania","height":172},{"country":"Azerbaijan","height":172},{"country":"Uruguay","height":171.8},{"country":"Argentina","height":171.3},{"country":"SouthKorea","height":171},{"country":"Syria","height":171},{"country":"Morocco","height":170.7},{"country":"Iran","height":170.6},{"country":"Portugal","height":170.5},{"country":"Ivory Coast","height":170.4},{"country":"Egypt","height":170.3},{"country":"Tunisia","height":170.3},{"country":"Algeria","height":170.2},{"country":"South Africa","height":170},{"country":"Cameroon","height":170},{"country":"Gambia","height":170},{"country":"Ghana","height":169.8},{"country":"Brazil","height":169.5},{"country":"Colombia","height":169.5},{"country":"Taiwan","height":169.3},{"country":"Chile","height":169.2},{"country":"Venezuela","height":169},{"country":"Paraguay","height":169},{"country":"Japan","height":168.6},{"country":"Hong Kong","height":168.5},{"country":"China","height":168.3},{"country":"Mexico","height":167.5},{"country":"Pakistan","height":167},{"country":"Singapore","height":166.6},{"country":"Thailand","height":166.4},{"country":"Mongolia","height":166.4},{"country":"Malaysia","height":166},{"country":"Sri Lanka","height":166},{"country":"Malawi","height":166},{"country":"Bahrain","height":165.6},{"country":"Iraq","height":165.4},{"country":"Nigeria","height":165},{"country":"Peru","height":164.3},{"country":"NorthKorea","height":163.8},{"country":"India","height":162.3},{"country":"Vietnam","height":162.1},{"country":"Philippines","height":162},{"country":"Indonesia","height":161.5},{"country":"Cambodia","height":160.3}]
-
-/***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-3. Cho chuỗi: "thu 2, thu 5, thu 4, thu 3, thu 6, thu 7";
-a. Tách lấy tất cả các số có trong chuỗi.
-b. Chuyển chuỗi ở trên thành ngày tiếng anh dạng "on Monday, ...., on Saturday".
-Note: Giả thiết một tuần có 6 ngày. Không có ngày chủ nhật.
-*/
-console.log("-------------- Cau 3 ------------------");
-var str = "thu 2, thu 5, thu 4, thu 3, thu 6, thu 7";
-
-console.log("-------------- Cau 3a ------------------");
-var allNumber = str.match(/\d+/g).join("");
-console.log(allNumber);
-console.log("-------------- Het Cau 3a ------------------\n");
-
-console.log("-------------- Cau 3b ------------------");
-var daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-var res = str.replace(/thu/gi, "on");
-res = res.replace(/\d+/gi, function (x) {
-  return daysInWeek[x - 2];
-});
-console.log(res);
-console.log("-------------- Het Cau 3b ------------------\n");
 
 /***/ })
 /******/ ]);
