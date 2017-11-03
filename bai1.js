@@ -4,8 +4,8 @@
 import {calculateAge, log} from './actions';
 import moment from 'moment';
 
+let res = calculateAge();
+document.getElementById("solution1").innerHTML = document.getElementById("date").value;;
 log("Cau 1", true);
-let date = '22/12/2012';
-let birthday = moment(date, "DD/MM/YYYY");
-log(`so tuoi hien tai: ${calculateAge(birthday)}`);
+log(`so tuoi hien tai: ${res}`);
 log("Het cau 1", true);
